@@ -23,6 +23,10 @@ Below is a list of the extra options you can specify:
 eg. 
 	<%= mp3_player @my_model.mp3.url, :bg => "99FFFF") %>
 
+Additionally, if you want to go the super simple route, you can just use google's MP3 player with the following helper (you can use this even without doing the whole "script/generate mp3_player" thing)
+
+  <%= google_mp3_player @my_model.mp3.url %>
+
 [:width] width of the player when open in pixels, defaults to 290
 [:class] class of the div wrapping the player, defaults to "mp3_player"
 [:bg] background colour, defaults to "BBBBBB"
