@@ -105,6 +105,14 @@ module Mp3Player
     end
     
     attr_reader :player_count
+    
+    def google_mp3_player(mp3)
+      %Q{
+        <embed type="application/x-shockwave-flash" wmode="transparent" src="http://www.google.com/reader/ui/3523697345-audio-player.swf?audioUrl=#{mp3}" height="27" width="320"></embed>
+      }
+    end
+    
+    module_function :google_mp3_player
   end
 
 end
