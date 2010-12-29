@@ -1,26 +1,32 @@
 =Mp3Player
 
-Here's an mp3_player plugin for Rails.
+Here's an mp3_player plugin for Rails 3.
 Check out http://handyrailstips.com/tips/7-playing-mp3-s-on-your-rails-site-with-mp3_player for more info
 
 To install:
-	script/plugin install git://github.com/GavinM/mp3_player.git
+	rails plugin install git://github.com/sekrett/mp3_player.git
 
 To setup:
-	script/generate mp3_player [name of your mp3 directory]
+	rails generate mp3_player
 
-This adds 'player.swf' to <em>public/</em> and creates a new folder for storing all of your audio files.
+This adds 'player.swf' to <em>public/</em>.
 
 ==Example Usage
 
-To play an mp3 file found in _public/mp3s/mysong.mp3_ simply add <%= mp3_player("mp3s/mysong.mp3") %> to your view.
+To check player is working simply add:
 
-If you're using paperclip: 
+  <%= mp3_player("http://github.com/sekrett/mp3_player/raw/master/test.mp3") %>
+
+to your view.
+
+If you're using paperclip:
+
 	<%= mp3_player @my_model.mp3.url %>.
 
 Below is a list of the extra options you can specify:
 (All colors should be expressed as hexadecimal values minus the '#'. 
 eg. 
+
 	<%= mp3_player @my_model.mp3.url, :bg => "99FFFF") %>
 
 Additionally, if you want to go the super simple route, you can just use google's MP3 player with the following helper (you can use this even without doing the whole "script/generate mp3_player" thing)
@@ -42,8 +48,9 @@ Additionally, if you want to go the super simple route, you can just use google'
 [:track] colour of the track on the slider, defaults to "888888"
 [:border] colour of the buffer border, defaults to "333333"
 
-This plugin is based on the Audio Player Worpress Plugin by Martin Laine http://www.1pixelout.net/code/audio-player-wordpress-plugin
+This plugin is based on the Audio Player 2.0 by Martin Laine (http://wpaudioplayer.com/standalone)
 
 Thanks to Matt Ittigson (http://github.com/mattenat) for inspiring changes to help support paperclip.
 
 Copyright © 2009 Gavin Morrice (http://handyrailstips.com), released under the MIT license
+Copyright © 2010 Alexander Zubkov (http://github.com/sekrett), released under the MIT license
