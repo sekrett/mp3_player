@@ -81,9 +81,11 @@ module Mp3Player
       # join params with an ampersand
       flash_vars = flash_vars.join("&").to_s
 
+      increment_player_count
+
       # turn the whole thing into a meaty string
       output = <<-HTML
-        <div class=\"#{options[:class]}\" id=\"mp3_player_#{player_count}\">
+        <div class=\"#{options[:class]}\" id=\"mp3_player_#{@@player_count}\">
           <object type="application/x-shockwave-flash" data="/player.swf" height="24" width=\"#{options[:width]}\">
             <param name="movie" value="/player.swf" />
             <param name="FlashVars" value="#{URI.escape flash_vars}" />
@@ -98,13 +100,10 @@ module Mp3Player
   
     module_function :mp3_player
 
-
     def increment_player_count
-      @player_count ||= 0
-      @player_count += 1
+      @@player_count ||= 0
+      @@player_count += 1
     end
-    
-    attr_reader :player_count
     
     def google_mp3_player(mp3)
       %Q{
