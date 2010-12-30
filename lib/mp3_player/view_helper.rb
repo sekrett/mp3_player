@@ -93,7 +93,7 @@ module Mp3Player
           </object>
         </div>
       HTML
-      output # => your awesome mp3_player
+      output.html_safe # => your awesome mp3_player
     end
   
     module_function :mp3_player
