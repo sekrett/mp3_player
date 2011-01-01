@@ -10,8 +10,8 @@ To setup:
 
   rails generate mp3_player
 
-This adds <i>player.swf</i> and <i>audio-player.js</i> to \_public/_>. You may use \+--skip-swfobject+ to add
-\_audio-player-noswfobject.js_, if your layout already has included _swfobject_ like this:
+This adds <i>player.swf</i> and <i>audio-player.js</i> to <i>public/</i>. You may use <tt>--skip-swfobject</tt> to add
+<i>audio-player-noswfobject.js</i>, if your layout already has included <i>swfobject</i> like this:
 
   <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js' %>
 
