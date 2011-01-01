@@ -1,15 +1,25 @@
 =Mp3Player
 
 Here's an mp3_player plugin for Rails 3.
-Check out http://handyrailstips.com/tips/7-playing-mp3-s-on-your-rails-site-with-mp3_player for more info
 
 To install:
-	rails plugin install git://github.com/sekrett/mp3_player.git
+
+  rails plugin install git://github.com/sekrett/mp3_player.git
 
 To setup:
-	rails generate mp3_player
 
-This adds 'player.swf' to <em>public/</em>.
+  rails generate mp3_player
+
+This adds _player.swf_ and _audio-player.js_ to _public/_>. You may use +--skip-swfobject+ to add
+_audio-player-noswfobject.js_, if your layout already has included _swfobject_ like this:
+
+  <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js' %>
+
+In your layout add:
+
+  <%= mp3_player_headers %>
+
+It will automatically detect, which js file you have generated and include it.
 
 ==Example Usage
 
@@ -21,36 +31,25 @@ to your view.
 
 If you're using paperclip:
 
-	<%= mp3_player @my_model.mp3.url %>.
+  <%= mp3_player @my_model.mp3.url %>
 
-Below is a list of the extra options you can specify:
-(All colors should be expressed as hexadecimal values minus the '#'. 
-eg. 
-
-	<%= mp3_player @my_model.mp3.url, :bg => "99FFFF") %>
-
-Additionally, if you want to go the super simple route, you can just use google's MP3 player with the following helper (you can use this even without doing the whole "script/generate mp3_player" thing)
+Additionally, if you want to go the super simple route, you can just use google's MP3 player with the following helper
+(you can use this even without doing the whole "rails generate mp3_player" thing)
 
   <%= google_mp3_player @my_model.mp3.url %>
 
-[:width] width of the player when open in pixels, defaults to 290
-[:class] class of the div wrapping the player, defaults to "mp3_player"
-[:bg] background colour, defaults to "BBBBBB"
-[:left_bg] background colour of the left tab, defaults to "AAAAAA"
-[:right_bg] background colour of the right tab, defaults to "AAAAAA"
-[:right_bg_hover] colour of the right background as the cursor hovers over, defaults to "EEEEEE"
-[:left_icon] the colour of the speaker icon on the left, defaults to "222222"
-[:right_icon] colour of the play/pause icon on the right, defaults to "222222"
-[:right_icon_hover] colour of the play/pause icon as the cursor hovers over, defaults to "222222"
-[:text] colour of the text, defaults to "222222"
-[:slider] colour of the slider bar, defaults to "333333"
-[:loader] colour of the loaded data so far, defaults to "DDDFFF"
-[:track] colour of the track on the slider, defaults to "888888"
-[:border] colour of the buffer border, defaults to "333333"
+=Customization
+
+You may specify extra options (all colors should be expressed as hexadecimal values minus the '#'. eg.
+
+  <%= mp3_player @my_model.mp3.url, { bg: "99FFFF", text: 'FF0000') %>
+
+For a complete list of options see documentation at http://wpaudioplayer.com/standalone.
 
 This plugin is based on the Audio Player 2.0 by Martin Laine (http://wpaudioplayer.com/standalone)
 
 Thanks to Matt Ittigson (http://github.com/mattenat) for inspiring changes to help support paperclip.
 
 Copyright © 2009 Gavin Morrice (http://handyrailstips.com), released under the MIT license
+
 Copyright © 2010 Alexander Zubkov (http://github.com/sekrett), released under the MIT license
