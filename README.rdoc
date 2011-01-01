@@ -38,7 +38,7 @@ Additionally, if you want to go the super simple route, you can just use google'
 
   <%= google_mp3_player @my_model.mp3.url %>
 
-=Customization
+==Customization
 
 You may specify extra options (all colors should be expressed as hexadecimal values minus the '#'. eg.
 
