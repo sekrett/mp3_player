@@ -6,7 +6,8 @@ module Mp3Player
       elsif File.exists?(Rails.root.join('public', 'javascripts', 'audio-player-noswfobject.js'))
         audio_player_path = 'audio-player-noswfobject.js'
       else
-        logger.warn "Missing js file. Did you run 'rails generate mp3_player'?"
+        logger.warn "WARNING: Missing js file. Did you run 'rails generate mp3_player'?"
+        return
       end
       
       ViewHelper.reset_player_count
