@@ -11,8 +11,16 @@ module Mp3Player
       end
       
       ViewHelper.reset_player_count
+
+      file = File.open("#{Rails.root}/config/mp3_player.yml")
+      if Rails.env.production?
+        default_options = YAML::load(file) if default_options.nil?
+      else
+        default_options = YAML::load(file)
+      end
+      options.reverse_merge! default_options
       options.reverse_merge!({ width: 290 })
-      
+
       javascript_include_tag(audio_player_path) +
         %Q[
           <script type="text/javascript">

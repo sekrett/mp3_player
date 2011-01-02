@@ -12,17 +12,19 @@ module Mp3Player
 
       options.merge!({soundFile: path})
 
-      # turn the whole thing into a meaty string
-      output = %Q[
+      %Q[
         <p id="audioplayer_#{@@player_count}">Alternative content</p>
           <script type="text/javascript">
             AudioPlayer.embed("audioplayer_#{@@player_count}", #{options.to_json});
           </script>
-      ]
-      output.html_safe # => your awesome mp3_player
+      ].html_safe
     end
   
-    module_function :mp3_player
+    def google_mp3_player path
+      %Q[
+        <embed type="application/x-shockwave-flash" wmode="transparent" src="http://www.google.com/reader/ui/3523697345-audio-player.swf?audioUrl=#{path}" height="27" width="320"></embed>
+      ]
+    end
 
     def increment_player_count
       @@player_count += 1
@@ -31,13 +33,5 @@ module Mp3Player
     def self.reset_player_count
       @@player_count = 0
     end
-    
-    def google_mp3_player path
-      %Q{
-        <embed type="application/x-shockwave-flash" wmode="transparent" src="http://www.google.com/reader/ui/3523697345-audio-player.swf?audioUrl=#{path}" height="27" width="320"></embed>
-      }
-    end
-    
-    module_function :google_mp3_player
   end
 end
