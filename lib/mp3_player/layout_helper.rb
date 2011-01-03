@@ -1,5 +1,7 @@
 module Mp3Player
   module LayoutHelper
+    @@default_options = nil
+
     def mp3_player_headers options = {}
       if File.exists?(Rails.root.join('public', 'javascripts', 'audio-player.js'))
         audio_player_path = 'audio-player.js'
@@ -12,13 +14,13 @@ module Mp3Player
       
       ViewHelper.reset_player_count
 
-      file = File.open Rails.root.join('config', 'mp3_player.yml')
+      file_name = Rails.root.join('config', 'mp3_player.yml')
       if Rails.env.production?
-        default_options = YAML::load(file) if default_options.nil?
+        @@default_options = YAML::load(File.open(file_name)) if @@default_options.nil?
       else
-        default_options = YAML::load(file)
+        @@default_options = YAML::load(File.open(file_name))
       end
-      options.reverse_merge! default_options if default_options
+      options.reverse_merge! @@default_options if @@default_options
       options.reverse_merge!({ width: 290 })
 
       javascript_include_tag(audio_player_path) +
