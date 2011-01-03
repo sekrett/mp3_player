@@ -12,7 +12,7 @@ module Mp3Player
       
       ViewHelper.reset_player_count
 
-      file = File.open("#{Rails.root}/config/mp3_player.yml")
+      file = File.open Rails.root.join('config', 'mp3_player.yml')
       if Rails.env.production?
         default_options = YAML::load(file) if default_options.nil?
       else
