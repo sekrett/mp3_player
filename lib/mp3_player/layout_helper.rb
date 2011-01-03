@@ -18,7 +18,7 @@ module Mp3Player
       else
         default_options = YAML::load(file)
       end
-      options.reverse_merge! default_options
+      options.reverse_merge! default_options if default_options
       options.reverse_merge!({ width: 290 })
 
       javascript_include_tag(audio_player_path) +
