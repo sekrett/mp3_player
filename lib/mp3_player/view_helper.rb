@@ -1,4 +1,3 @@
-require "uri"
 module Mp3Player
   # This module contains the view helper <tt>mp3_player</tt> and <tt>google_mp3_player</tt>
   module ViewHelper
@@ -23,7 +22,7 @@ module Mp3Player
     def google_mp3_player path
       %Q[
         <embed type="application/x-shockwave-flash" wmode="transparent" src="http://www.google.com/reader/ui/3523697345-audio-player.swf?audioUrl=#{path}" height="27" width="320"></embed>
-      ]
+      ].html_safe
     end
 
     def increment_player_count
