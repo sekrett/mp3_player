@@ -1,8 +1,0 @@
-Description:
-    A simple mp3 player plugin for rails
-
-Example:
-    rails generate mp3_player
-
-    This will create:
-        public/player.swf
