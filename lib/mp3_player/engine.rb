@@ -8,5 +8,10 @@ module Mp3Player
               'audio-player-noswfobject.js',
               'player.swf'
           ]
+    end
+
+    initializer 'mp3_player.load_options' do
+      Configuration.load_options
+    end
   end
 end
