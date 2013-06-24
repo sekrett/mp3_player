@@ -1,33 +1,41 @@
 module Mp3Player
   module LayoutHelper
-    @@default_options = nil
+    if Rails.env.production?
+      load_config_options
+    else
+      @@default_options = nil
+    end
 
     def mp3_player_headers options = {}
-      if File.exists?(Rails.root.join('public', 'javascripts', 'audio-player.js'))
-        audio_player_path = 'audio-player.js'
-      elsif File.exists?(Rails.root.join('public', 'javascripts', 'audio-player-noswfobject.js'))
-        audio_player_path = 'audio-player-noswfobject.js'
-      else
-        logger.warn "WARNING: Missing js file. Did you run 'rails generate mp3_player'?"
-        return
-      end
-      
       ViewHelper.reset_player_count
 
-      file_name = Rails.root.join('config', 'mp3_player.yml')
-      if Rails.env.production?
-        @@default_options = YAML::load(File.open(file_name)) if @@default_options.nil?
-      else
-        @@default_options = YAML::load(File.open(file_name))
-      end
+      # Don't reload configuration options in production env
+      load_config_options if !Rails.env.production?
+
       options.reverse_merge! @@default_options if @@default_options
       options.reverse_merge!({ width: 290 })
 
+      audio_player_path = if options[:with_swfobject] == false
+                            'audio-player-noswfobject.js'
+                          else
+                            'audio-player.js'
+                          end
+
       javascript_include_tag(audio_player_path) +
-        %Q[
+          %Q[
           <script type="text/javascript">
-            AudioPlayer.setup("/player.swf", #{options.to_json} );
+            AudioPlayer.setup("#{asset_path('player.swf')}/", #{options.to_json} );
           </script>].html_safe
+    end
+
+    private
+    def load_config_options
+      config_file_path = Rails.root.join('config', 'mp3_player.yml')
+      @@default_options = if File.exists? config_file_path
+                            YAML::load(File.open(config_file_path))
+                          else
+                            nil
+                          end
     end
   end
 end
